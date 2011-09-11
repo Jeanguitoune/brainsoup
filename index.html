@@ -1,0 +1,274 @@
+<!doctype html>
+<meta charset=utf8>
+<title>brainsoup</title>
+<style>
+    body
+	{
+	background-color: #6699FF;
+	}
+
+  .slide {
+    text-align: center;
+    margin: 0 auto;
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  input[type=submit], input[type=button]{
+    width: 20%;
+    height: 100%;
+    background: transparent;
+    font-size: 2em;
+    color: white;
+    border: 0;
+    float: left;
+  }
+  div.central {
+    height: 50%;
+    #padding-top: 20%;
+    margin: auto;
+    width: 60%;
+    float: left;
+  }
+
+  
+</style>
+
+<form id=screen1 class="slide" action="javascript:next()">
+  <input type=button>
+  <div class=central>
+    <img src="img/brainsoup.png" />
+	<div id="topblock" style="position: absolute; background-color: #6699FF; width: 30%; height: 300px; margin-left: 200px;">
+	<input id="uparrow" type=button onclick="ascend();" value=&uarr; style="margin-left: 3em;  visibility: hidden; text-align: center; height: 50px; margin-top : 250px">
+	</div>
+	<div id=wordmove style="width: 30%; margin: auto; margin-top: 300px;">
+		<input id=word1 name=word1 placeholder="word">
+		<input id=word2 name=word2 placeholder="word">
+		<input id=word3 name=word3 placeholder="word">
+		<input id=word4 name=word4 placeholder="word">	
+		<input id=word5 name=word5 placeholder="word" style="visibility: hidden;">
+		<input id=word6 name=word6 placeholder="word" style="visibility: hidden;">
+		<input id=word7 name=word7 placeholder="word" style="visibility: hidden;">
+		<input id=word8 name=word8 placeholder="word" style="visibility: hidden;">
+		<input id=word9 name=word9 placeholder="word" style="visibility: hidden;">
+		<input id=word10 name=word10 placeholder="word" style="visibility: hidden;">
+		<input id=word11 name=word11 placeholder="word" style="visibility: hidden;">
+		<input id=word12 name=word12 placeholder="word" style="visibility: hidden;">
+		<input id=word13 name=word13 placeholder="word" style="visibility: hidden;">
+		<input id=word14 name=word14 placeholder="word" style="visibility: hidden;">
+		<input id=word15 name=word15 placeholder="word" style="visibility: hidden;">
+	</div>
+		<div id="downblock" style="position: absolute; width: 30%; height: 300px;  margin-left: 200px; background-color: #6699FF; margin-top: -275px;">
+	<input id="downarrow" type=button onclick="descend();" value=&darr; style="margin-left: 3em; visibility: hidden; text-align: center; height: 50px;">
+	<input id="plus" type=button onclick="newword();" value=+ style="margin-left: 3.5em; height: 50px;">
+	</div>
+		
+  </div>
+  <input type=submit value=⟩>
+</form>
+
+<form id=screen2 class=slide action="javascript:next();combin();">
+  <input type=button value=⟨ onclick="previous();">
+  <div class=central>
+	<div id="topblock2" style="position: absolute; background-color: #6699FF; width: 30%; height: 300px; margin-left: 200px;">
+	<p style="text-align: center; height: 50px; margin-top : 250px;  margin-right: 0px; text-color: #2F4F4F ;">soup size? (2-5)</p>
+	</div>
+	<div id=wordmove2 style="width: 30%; margin-left: 200px; margin-top: 300px; position: absolute;">
+		<input id=soupsize name=size placeholder="size" required="required" pattern="[2-5]">
+
+	</div>
+	<div id="downblock2" style="position: absolute; width: 30%; height: 300px;  margin-left: 350px; background-color: #6699FF; margin-top: -275px;">
+	</div>
+		
+  </div>
+  <input type=submit value=⟩>
+</form>
+
+<form id=screen3 class=slide action="javascript:next();">
+  <input type=button value=⟨ onclick="previous();">
+  <div class=central>
+	<div id="topblock2" style="position: absolute; background-color: #6699FF; width: 30%; height: 300px; margin-left: 200px;">
+	<p style="text-align: center; height: 50px; margin-top : 250px; color: #2F4F4F ; margin-right: 0px;">Yo</p>
+	</div>
+	<div id=wordmove2 style="width: 30%; margin-left: 200px; margin-top: 300px; position: absolute;">
+		<input name=size placeholder="yo">
+
+	</div>
+	<div id="downblock2" style="position: absolute; width: 30%; height: 300px;  margin-left: 350px; background-color: #6699FF; margin-top: -275px;">
+	</div>
+		
+  </div>
+  <input type=submit value=⟩>
+</form>
+
+<script src=js/jquery-1.6.2.min.js></script>
+<script src=js/jquery-ui-1.8.16.custom.min.js></script>
+<script src=js/spin.js></script>
+<script src=js/scout.js></script>
+
+<script>
+
+ var current = 1, data = {};
+ var currenttop = 1, data = {};
+  var currentsize = 4, data = {};
+ var limit = 15, data = {};
+
+  function start() {
+    current = 1;
+	currenttop = 1;
+	limit = 15;
+	currentsize=4;
+    $('#result').hide('slide', { direction: 'left'}, 1000);
+    $('#screen1').show('slide', { direction: 'right' }, 1000);
+	
+  }
+
+  function next() {
+    var screen = Scout('#screen'+current);
+    for ( var key in screen.elements) {
+      if (screen[key] && screen[key].name) {
+        data[screen[key].name] = screen[key].value;
+      } 
+    }
+    console.log(data);
+    $('#screen'+(current++)).hide('slide', { direction: 'left' }, 1000);
+    $('#screen'+current).show('slide', { direction: 'right' }, 1000);
+  };
+
+  function previous() {
+    $('#screen'+(current--)).hide('slide', { direction: 'right' }, 1000);
+    $('#screen'+current).show('slide', { direction: 'left' }, 1000);
+  };
+  
+ function newword() {
+   console.log("newword");
+
+     if (currentsize<limit)
+	{
+		$('#plus').attr('disabled', '');
+		if(currenttop < currentsize-3)
+		{
+			var begintop = currenttop;
+			var currenttop2 = currenttop;
+			for(var i=0;i<currentsize-3-begintop;i++)
+			{
+			$('#word'+(currenttop2+4)).css('visibility', 'visible');
+			$('#wordmove').animate({marginTop: '-=25'}, "fast",function(){ $('#word'+(currenttop)).css('visibility','hidden');currenttop++;});
+			$('#downblock').animate({marginTop: '+=25'}, "fast",function(){ $('#downarrow').removeAttr('disabled');});
+			
+			currenttop2++;
+			console.log('iteration'+i);
+				
+			}
+			$('#word'+(currenttop2+4)).css('visibility', 'visible');
+		}
+		
+		$('#uparrow').css('visibility','visible');
+		if(currenttop==currentsize-3){$('#downarrow').css('visibility','hidden');}
+
+	
+	$('#wordmove').animate({marginTop: '-=25'}, "fast");
+	$('#downblock').animate({marginTop: '+=25'}, "fast",function(){$('#word'+(currenttop)).css('visibility', 'hidden');$('#plus').removeAttr('disabled');currenttop++;});
+	$('#word'+(currenttop+4)).css('visibility', 'visible');
+
+		//currenttop++;
+		currentsize++;
+	}
+	console.log(currentsize);
+	console.log(currenttop);
+  };
+  
+  function ascend() {
+  console.log("ascend");
+  if (currenttop>1)
+	{
+
+		
+			$('#downarrow').css('visibility','visible');
+			$('#uparrow').attr('disabled', '');
+		
+		if(currenttop==2)
+			{$('#uparrow').css('visibility','hidden');}
+	
+ 	 $('#wordmove').animate({marginTop: '+=25'}, "fast");
+	$('#downblock').animate({marginTop: '-=25'}, "fast",function(){$('#word'+(currenttop+3)).css('visibility', 'hidden');$('#uparrow').removeAttr('disabled');currenttop--;});
+	$('#word'+(currenttop-1)).css('visibility', 'visible');
+
+	}
+	console.log(currentsize);
+	console.log(currenttop);
+  };
+  
+  function descend() {
+  console.log("descend");
+	  if (currenttop<limit-3)
+	{
+	$('#downarrow').attr('disabled','');
+	
+	if(currenttop==currentsize-4)
+		{
+		
+		$('#uparrow').css('visibility','visible');}
+		if(currenttop==currentsize-4)
+			{$('#downarrow').css('visibility','hidden');}
+	
+		$('#wordmove').animate({marginTop: '-=25'}, "fast");
+		$('#downblock').animate({marginTop: '+=25'}, "fast",function(){$('#word'+(currenttop)).css('visibility', 'hidden');$('#downarrow').removeAttr('disabled');currenttop++;});
+		
+		$('#word'+(currenttop+4)).css('visibility', 'visible');
+	}
+	console.log(currentsize);
+	console.log(currenttop);
+  };
+
+function combin() {
+    	var cpt=0;
+	var wordlist = [];
+	for(var i=1;i<=15;i++)
+	{	
+		var mot = $('#word'+i).val();
+		if(mot!= '')
+		{console.log('word'+i+' remplie avec '+mot);
+		wordlist[cpt]=mot;
+		cpt++;
+		}
+	}
+	var size = $('#soupsize').val();
+	console.log(size);
+
+  }
+
+  
+  /*
+  Scout('#screen2').on ('submit', function (query) {
+
+    var screen = Scout('#screen2');
+    for ( var key in screen.elements) {
+      if (screen[key] && screen[key].name) {
+        data[screen[key].name] = screen[key].value;
+      } 
+    }
+    $('#screen2').hide('slide', { direction: 'left' }, 1000);
+    $('#result').show('slide', { direction: 'right' }, 1000);
+
+    var spinner = new Spinner().spin();
+    Scout('#spinner').appendChild(spinner.el);
+
+    console.log('sending\n', JSON.stringify(data));
+
+    query.action = 'englishLetter';
+    query.data = data;
+    query.resp = function (output) {
+      console.log('received:\n'+output);
+      Scout('#content').innerHTML = output;
+    };
+    query.error = function () {
+      console.log('ERROR');
+    };
+
+  });*/
+
+  start();
+
+</script>
