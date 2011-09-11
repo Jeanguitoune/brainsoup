@@ -3,7 +3,7 @@
 <title>brainsoup</title>
 <style>
     body
-	{
+    {
 	background-color: #6699FF;
 	}
 
@@ -38,8 +38,12 @@
 <form id=screen1 class="slide" action="javascript:next()">
   <input type=button>
   <div class=central>
-    <img src="img/brainsoup.png" />
+  
 	<div id="topblock" style="position: absolute; background-color: #6699FF; width: 30%; height: 300px; margin-left: 200px;">
+	<img src="img/cloud.jpg" alt="nouuuage" style="width: 65%; height: 65%; margin-top: 0px;"/>
+    <p style="color: #FFFFFF; margin-left: 5em; position: absolute; height: 20px; margin-top: 0px; font-size: 25px; font-family:'Lucida Console',Georgia,Serif;">
+    brainsoup
+    </p>
 	<input id="uparrow" type=button onclick="ascend();" value=&uarr; style="margin-left: 3em;  visibility: hidden; text-align: center; height: 50px; margin-top : 250px">
 	</div>
 	<div id=wordmove style="width: 30%; margin: auto; margin-top: 300px;">
@@ -62,6 +66,7 @@
 		<div id="downblock" style="position: absolute; width: 30%; height: 300px;  margin-left: 200px; background-color: #6699FF; margin-top: -275px;">
 	<input id="downarrow" type=button onclick="descend();" value=&darr; style="margin-left: 3em; visibility: hidden; text-align: center; height: 50px;">
 	<input id="plus" type=button onclick="newword();" value=+ style="margin-left: 3.5em; height: 50px;">
+    
 	</div>
 		
   </div>
@@ -76,11 +81,7 @@
 	</div>
 	<div id=wordmove2 style="width: 30%; margin-left: 200px; margin-top: 300px; position: absolute;">
 		<input id=soupsize name=size placeholder="size" required="required" pattern="[2-5]">
-
 	</div>
-	<div id="downblock2" style="position: absolute; width: 30%; height: 300px;  margin-left: 350px; background-color: #6699FF; margin-top: -275px;">
-	</div>
-		
   </div>
   <input type=submit value=⟩>
 </form>
